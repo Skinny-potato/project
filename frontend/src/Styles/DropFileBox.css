@@ -1,0 +1,8 @@
+
+.dropzone {
+    text-align: center;
+    padding: 20px;
+    border: 3px #39a068 dashed;
+    width: 60%;
+    margin: auto;
+  }
