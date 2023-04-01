@@ -130,10 +130,10 @@ const Services = () => {
         </Box>
       </Flex>
       {flag ? (
-        <>
+        <div style={{marginLeft:"30vw",width:"40vw"}}>
           {console.log(result)}
           {result === "" ? (
-            <CircularProgress isIndeterminate color="green.300" />
+            <CircularProgress style={{marginLeft:"17vw"}} isIndeterminate color="green.300" />
           ) : (
             <>
               <Text fontSize="3xl">The preview of the Text you gave </Text>
@@ -152,7 +152,7 @@ const Services = () => {
               <Button onClick={handlFinalSubmission}>Submit</Button>
             </>
           )}
-        </>
+        </div>
       ) : (
         <></>
       )}

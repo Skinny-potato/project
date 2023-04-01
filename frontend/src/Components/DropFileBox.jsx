@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import "../Styles/DropFileBox.css";
 import { useDropzone } from "react-dropzone";
 import { useEffect } from "react";
-import { CloseButton } from "@chakra-ui/react";
+import { Button, CloseButton } from "@chakra-ui/react";
+import { AddIcon} from '@chakra-ui/icons'
 const DropFileBox = ({ open, handleFileUpload }) => {
   const [files, setFiles] = useState([]);
 
@@ -21,9 +22,9 @@ const DropFileBox = ({ open, handleFileUpload }) => {
   }, [acceptedFiles]);
 
   const fileItems = files.map((file) => (
-    <li key={file.path}>
+    <p key={file.path}>
       {file.path} - {file.size} bytes
-    </li>
+    </p>
   ));
   return (
     <>
@@ -40,18 +41,18 @@ const DropFileBox = ({ open, handleFileUpload }) => {
           <button type="button" onClick={open} className="btn">
           
           </button>
-          <br />
-          <br />
-          <br />
-          <br />
         </div>
         <aside>
-          <ul>{fileItems}</ul>
+          <div>{fileItems}</div>
         </aside>
+        {files.length!==0?(""):(<Button type="button"  onClick={removeFiles} className="cancel">
+        <AddIcon/>
+      </Button>)}
       </div>
-      <button type="button" onClick={removeFiles}>
-        <CloseButton />
-      </button>
+      {files.length===0?(""):(<Button type="button"  onClick={removeFiles} className="cancel">
+        Cancel
+      </Button>)}
+      
     </>
   );
 };
