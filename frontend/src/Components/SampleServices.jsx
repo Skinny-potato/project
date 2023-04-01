@@ -73,7 +73,7 @@ const Services = () => {
     }
     if (value === "Image") {
       console.log("Image Uploading");
-      return <ImageUpload />;
+      return <ImageUpload onResult={handleResult} flag={flaghandler}/>;
     }
     if (value === "File") {
       console.log("file Uploading");

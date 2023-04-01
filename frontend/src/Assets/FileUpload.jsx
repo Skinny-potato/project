@@ -17,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 const FileUpload = ({onResult,flag}) => {
 
   const [file, setFile] = useState(null);
-  const navigate = useNavigate();
   const handleFileUpload = (uploadedFile) => {
     setFile(uploadedFile);
     console.log(uploadedFile);

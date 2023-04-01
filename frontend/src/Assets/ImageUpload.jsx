@@ -14,9 +14,8 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const ImageUpload = () => {
+const ImageUpload = ({onResult,flag}) => {
   const [image, setImage] = useState(null);
-  const navigate = useNavigate();
   const handleImageUpload = (uploadedImage) => {
     setImage(uploadedImage);
     console.log(uploadedImage);
@@ -34,13 +33,14 @@ const ImageUpload = () => {
         .post("/result", formData)
         .then((response) => {
           console.log(response.data);
-          navigate("/result");
+          onResult("image successfully uploaded")
         })
         .catch((error) => {
           console.log(error);
         });
       console.log("Image is being handled here");
       console.log(image);
+      flag(true)
     } else {
       window.alert("You didnt select a image or the image is not supported!!");
     }
