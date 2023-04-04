@@ -1,5 +1,3 @@
-
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header.jsx"
 import Footer from "./Components/Footer.jsx"

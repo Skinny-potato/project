@@ -7,7 +7,7 @@ warnings.filterwarnings("ignore", module='bs4')
 
 def searchBing(query, num):
     urls = []
-    for url in search(query, num_results=num):
+    for url in search(query, num_results=num, proxy='202.137.31.155:5678'):
         urls.append(url)
     return urls
 
