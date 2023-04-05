@@ -15,5 +15,3 @@ def extractText(url):
     page = requests.get(url)
     soup = bs(page.text, 'html.parser')
     return soup.get_text()
-
-    
