@@ -2,6 +2,7 @@ import requests
 import sys
 
 theInput=sys.argv[1]
+# print(theInput)
 
 Api = 'ZYMD9c0g7Hwk2uJ7lWSkAOjV4SHLlfzd'
 
