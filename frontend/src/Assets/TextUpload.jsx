@@ -13,26 +13,24 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const DataContext = createContext(null);
-
-const TextUpload = () => {
+const TextUpload = ({handleLoading}) => {
   const [text, setText] = useState("");
   const navigate = useNavigate();
-  const [data, setData] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
     if (text) {
+      handleLoading(true)
       formData.append("text", text);
-
+      
       axios
-        .post("/result", formData)
-        .then((response) => {
-          console.log(response.data);
-          if (response.data) {
-            setData(response.data);
-            navigate("/result");
+      .post("/result", formData)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data) {
+            handleLoading(false)
+            navigate("/result", { state: { data: response.data } });
           }
         })
         .catch((error) => {
@@ -47,41 +45,39 @@ const TextUpload = () => {
 
   return (
     <>
-      <DataContext.Provider value={data}>
-        <Flex
-          flexDirection={"column"}
-          align={"center"}
-          justifyContent={"center"}
-          mb={"10vh"}
-        >
-          <Textarea
-            placeholder="Text..."
-            height={"40vh"}
-            mt={"5vh"}
-            width={"90vh"}
-            resize="none"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
+      <Flex
+        flexDirection={"column"}
+        align={"center"}
+        justifyContent={"center"}
+        mb={"10vh"}
+      >
+        <Textarea
+          placeholder="Text..."
+          height={"40vh"}
+          mt={"5vh"}
+          width={"90vh"}
+          resize="none"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
 
-          <Flex
-            alignItems={"center"}
-            justifyContent={"space-between"}
-            width={"90vh"}
-            flexDirection={"row-reverse"}
+        <Flex
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          width={"90vh"}
+          flexDirection={"row-reverse"}
+        >
+          <Button
+            onClick={handleSubmit}
+            colorScheme="teal"
+            variant="solid"
+            size={"sm"}
+            mt={"2vh"}
           >
-            <Button
-              onClick={handleSubmit}
-              colorScheme="teal"
-              variant="solid"
-              size={"sm"}
-              mt={"2vh"}
-            >
-              Submit
-            </Button>
-          </Flex>
+            Submit
+          </Button>
         </Flex>
-      </DataContext.Provider>
+      </Flex>
     </>
   );
 };

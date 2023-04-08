@@ -10,13 +10,15 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import React from "react";
 import FileUpload from "../Assets/FileUpload.jsx";
 import ImageUpload from "../Assets/ImageUpload.jsx";
 import TextUpload from "../Assets/TextUpload.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../Styles/sampleServices.css"
+import Loading from "./Loading.jsx";
 
 const Services = () => {
   const navigate = useNavigate();
@@ -26,6 +28,10 @@ const Services = () => {
   const [flag, setFlag] = useState(false);
   const [value, setValue] = useState("Textbox");
   const [submissionText, setSubmissionText] = useState("");
+  const componentRef = useRef(null);
+  const [loading,setLoading]=useState(false)
+  const [abortController, setAbortController] = useState(null);
+
 
   //handlers
   const handleResult = (data) => {
@@ -38,20 +44,24 @@ const Services = () => {
 
   const handlFinalSubmission = (e) => {
     e.preventDefault();
+    const controller = new AbortController();
+    setAbortController(controller);
+
     const formData = new FormData();
     if (submissionText) {
       formData.append("text", submissionText);
       console.log(submissionText);
       console.log(formData);
+      setLoading(true)
       axios
-        .post("/result", formData)
-        .then((response) => {
-          console.log(response.data);
-          navigate("/result");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      .post("/result", formData, { signal: controller.signal })
+      .then((response) => {
+        setLoading(false);
+        navigate("/result", { state: { data: response.data } });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
       console.log("Submission text is being handled here");
       console.log(submissionText);
       setSubmissionText("");
@@ -59,17 +69,33 @@ const Services = () => {
       window.alert("The text youre trying to submit is in wrong format");
     }
   };
+  const handleBackClick = () => {
+    if (abortController) {
+      abortController.abort();
+      setLoading(false)
+      setFlag(false)
+      setResult("")
+    }
+    navigate("/services")
+  };
+  const handleLoading=(arr)=>{
+    setLoading(arr)
+  }
   useEffect(() => {
     setSubmissionText(result);
   }, [result]);
-
+  useEffect(()=>{
+    if (flag && componentRef.current) {
+      componentRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  },[flag])
   // console.log("result",result);
 
   console.log(value);
   const switchTabs = () => {
     if (value === "Textbox") {
       console.log("Text Uploading");
-      return <TextUpload />;
+      return <TextUpload handleLoading={handleLoading} />;
     }
     if (value === "Image") {
       console.log("Image Uploading");
@@ -82,6 +108,8 @@ const Services = () => {
   };
 
   return (
+    
+    loading?<Loading handleClick={handleBackClick}/>:
     <>
       <Flex
         direction={"column"}
@@ -130,13 +158,13 @@ const Services = () => {
         </Box>
       </Flex>
       {flag ? (
-        <>
+        <div className="PreviewContainer" ref={componentRef}>
           {console.log(result)}
           {result === "" ? (
             <CircularProgress isIndeterminate color="green.300" />
           ) : (
             <>
-              <Text fontSize="3xl">The preview of the Text you gave </Text>
+              <Text fontSize="3xl" style={{color:"#45bfab"}}>Preview </Text>
               <Textarea
                 height={"40vh"}
                 mt={"5vh"}
@@ -145,18 +173,20 @@ const Services = () => {
                 value={submissionText}
                 onChange={(e) => setSubmissionText(e.target.value)}
               />
-              <Text fontSize="xl">
+              <Text fontSize="l" style={{marginTop:"4vh",marginBottom:"2vh"}}>
                 {" "}
-                <strong>NOTE :</strong> The preview of the Text you gave{" "}
+                <strong>NOTE :  &nbsp; </strong>This preview is editable and please change the text according to your wish{" "}
               </Text>
               <Button onClick={handlFinalSubmission}>Submit</Button>
             </>
           )}
-        </>
+        </div>
       ) : (
         <></>
       )}
     </>
+
+    
   );
 };
 

@@ -26,6 +26,10 @@ const FileUpload = ({onResult,flag}) => {
     event.preventDefault();
     const formData = new FormData();
     console.log(file);
+    if (file===undefined){
+      window.alert("You didnt select a file or the file is not supported!!");
+
+    }
     if (file["type"] === "application/pdf") {
       formData.append("file", file);
     }
@@ -36,13 +40,15 @@ const FileUpload = ({onResult,flag}) => {
           console.log(response.data);
           // navigate("/result");
           onResult(response.data)
+          flag(true)
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
+          
+          alert("You might have uploaded a corrupted file please check it")
         });
       console.log("File is being handled here");
       console.log(file);
-      flag(true)
     } else {
       window.alert("You didnt select a file or the file is not supported!!");
     }
@@ -55,7 +61,7 @@ const FileUpload = ({onResult,flag}) => {
         justifyContent={"center"}
         mb={"10vh"}
       >
-        <DropFileBox handleFileUpload={handleFileUpload} />
+        <DropFileBox handleFileUpload={handleFileUpload} flag={flag} />
         <Flex
           alignItems={"center"}
           justifyContent={"space-between"}
@@ -68,6 +74,7 @@ const FileUpload = ({onResult,flag}) => {
             variant="solid"
             size={"sm"}
             mt={"2vh"}
+            style={{marginTop:"5vh"}}
           >
             Next
           </Button>

@@ -5,6 +5,9 @@ import "../Styles/DropFileBox.css";
 import { useDropzone } from "react-dropzone";
 import { useEffect } from "react";
 import { Button, CloseButton } from "@chakra-ui/react";
+import { Image } from '@chakra-ui/react'
+import "../Styles/DropImageBox.css"
+
 
 const DropFileBox = ({ open, handleImageUpload }) => {
   const [images, setImages] = useState([]);
@@ -22,9 +25,9 @@ const DropFileBox = ({ open, handleImageUpload }) => {
   }, [acceptedFiles]);
 
   const fileItems = images.map((image) => (
-    <li key={image.path}>
+    <p key={image.path}>
       {image.path} - {image.size} bytes
-    </li>
+    </p>
   ));
   return (
     <>
@@ -44,23 +47,22 @@ const DropFileBox = ({ open, handleImageUpload }) => {
             onClick={open}
             className="btn"
             variant="ghost"
-            style={{fontSize:"30px"}}
+            style={{ fontSize: "30px", marginTop: "3vh" }}
           >
             +
           </Button>
-
-          <br />
-          <br />
+          {/* <Image src="E:/Final_Year_Project/MERN/frontend/src/Sng/imageupload.png" alt='Upload image' /> */}
+        
           <br />
           <br />
         </div>
         <aside>
-          <ul>{fileItems}</ul>
+          <p style={{ paddingBottom: "3vh" }}>{fileItems}</p>
         </aside>
       </div>
-      <button type="button" onClick={removeImages}>
+      {images?.length>0?<button type="button" onClick={removeImages} style={{marginTop:"2vh"}}>
         <CloseButton />
-      </button>
+      </button>:null}      
     </>
   );
 };

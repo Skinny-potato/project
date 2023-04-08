@@ -1,0 +1,56 @@
+#result_container {
+  display: flex;
+  flex-direction: column;
+  height: 120vh;
+  width: 70vw;
+  margin: auto;
+}
+#result_container button{
+  width: 7vw;
+  margin-top: 15vh;
+  
+}
+
+#result_container Table {
+  margin-top: 10vh;
+  background-color: #2a7c6f;
+}
+#result_container Table th {
+  color: white;
+}
+#result_container Table td {
+  color: white;
+}
+#result_container Table td :hover {
+  transition: 1s;
+}
+#result_container Table tr {
+  margin: 20px;
+}
+
+#result_container Table tbody {
+  background-color: #6aa49a;
+}
+
+#result_container Table tbody :hover {
+  background-color: #2a7c6f;
+}
+
+.data {
+  margin-top: 5vh;
+  color: #2a7c6f;
+  font-weight: 700;
+}
+
+#error_container{
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 70vw;
+  margin: auto;
+}
+
+#error_container button{
+  width: 7vw;
+  margin-top: 20vh;
+}
