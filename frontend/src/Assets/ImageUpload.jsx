@@ -67,6 +67,7 @@ const ImageUpload = ({onResult,flag}) => {
             size={"sm"}
             mt={"2vh"}
             flexDirection={"row-reverse"}
+            style={{marginTop:"5vh"}}
           >
             Next
           </Button>

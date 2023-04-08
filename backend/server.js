@@ -45,7 +45,7 @@ app.post('/result', upload.any(), async (req, res) => {
 
         process.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
-            res.send(`Script finished with code ${code} and ${dataFromText} `);
+            res.send(dataFromText);
         });
 
         console.log(dataFromText);
