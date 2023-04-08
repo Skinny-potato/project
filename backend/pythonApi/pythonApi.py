@@ -4,8 +4,6 @@ import sys
 
 import findingSimilarity
 
-
-
 theInput=sys.argv[1]
 # print(theInput)
 
