@@ -33,7 +33,8 @@ const ImageUpload = ({onResult,flag}) => {
         .post("/result", formData)
         .then((response) => {
           console.log(response.data);
-          onResult("image successfully uploaded")
+          onResult(response.data)
+          flag(true)
         })
         .catch((error) => {
           console.log(error);
@@ -53,7 +54,7 @@ const ImageUpload = ({onResult,flag}) => {
         justifyContent={"center"}
         mb={"10vh"}
       >
-        <DropImageBox handleImageUpload={handleImageUpload} />
+        <DropImageBox handleImageUpload={handleImageUpload} flag={flag} />
         <Flex
           alignItems={"center"}
           justifyContent={"space-between"}

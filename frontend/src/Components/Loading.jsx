@@ -24,7 +24,8 @@ const Loading = ({handleClick}) => {
           <Text>Your response has be sent to the server...... </Text>
           <br />
           <Text>Please Wait.......</Text>
-          <CircularProgress style={{marginLeft:"20vh"}} isIndeterminate color='green.300' />
+          <CircularProgress style={{marginLeft:"17vh"}} isIndeterminate color='green.300' />
+          {/* <CircularProgress style={{marginLeft:"20vh"}} isIndeterminate color='green.300' /> */}
         </CardBody>
         <CardFooter>
           <Button colorScheme="blue" onClick={handleClick}>Back</Button>

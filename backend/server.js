@@ -116,7 +116,8 @@ app.post('/result', upload.any(), async (req, res) => {
             
                     process.on('close', (code) => {
                         console.log(`child process exited with code ${code}`);
-                        res.send(`Script finished with code ${code} and ${dataFromText} `);
+                        const finalText = "The text from the Image File you uploaded is: \n\n" + dataFromText
+                        res.send(finalText);
                     });
             
                     console.log(dataFromText);

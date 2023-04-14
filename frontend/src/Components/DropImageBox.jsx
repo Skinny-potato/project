@@ -9,7 +9,7 @@ import { Image } from '@chakra-ui/react'
 import "../Styles/DropImageBox.css"
 
 
-const DropFileBox = ({ open, handleImageUpload }) => {
+const DropFileBox = ({ open, handleImageUpload ,flag}) => {
   const [images, setImages] = useState([]);
 
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
@@ -18,6 +18,7 @@ const DropFileBox = ({ open, handleImageUpload }) => {
   const removeImages = () => {
     handleImageUpload(null);
     setImages([]);
+    flag(false)
   };
   useEffect(() => {
     setImages(acceptedFiles);
