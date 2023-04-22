@@ -19,13 +19,11 @@ const Home = () => {
         <Box bgColor={"#388f81"} w="100%" h="80vh" padding={"100"}>
           <Flex direction={["column", "row"]} alignItems={"center"}>
             <Box mx={"20"}>
-              <img src="https://bit.ly/2Z4KKcF" alt="homeimage" />
+              {/* <img src="https://gobookmart.com/wp-content/uploads/2022/04/Plagiarism-What-Counts-And-What-Does-Not-1200x900.jpg" alt="homeimage" /> */}
+              <img src="https://img.freepik.com/free-vector/plagiarism-concept-illustration_23-2148406070.jpg?w=740&t=st=1682109181~exp=1682109781~hmac=d0eb437d25a307cf7a5ee261c868791225ea9d107f243c606a7cc48f89d86c69" alt="homeimage" />
             </Box>
             <Text textAlign={"center"} alignItems={"center"}>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Repellendus dicta suscipit, velit, esse ea mollitia excepturi
-              optio debitis corporis aut fugit dolorem cumque, vero
-              exercitationem voluptatum accusantium impedit odit expedita.
+            Detect plagiarism with ease. Our user-friendly tool compares your text with billions of online sources, providing accurate results in seconds. Simply upload your file and receive a detailed report with a percentage of originality. Try it now for free!
             </Text>
           </Flex>
         </Box>

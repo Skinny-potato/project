@@ -7,8 +7,8 @@ const Header = () => {
   return (
     <div>
       <Box bg="#2a7c6f" w="100%" p={10} pl={20} color="white">
-        <Heading as="h2" size="xl">
-          TITLE
+        <Heading as="h2" size="xl" style={{textDecoration: 'line-through',textDecorationColor: "#2a7c6f", textDecorationThickness:"4px"}}>
+          Plagiarism 
         </Heading>
       </Box>
       <HStack p={"4"} pl={10} shadow={"base"} bgColor={"white"}>

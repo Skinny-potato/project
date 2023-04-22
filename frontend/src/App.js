@@ -5,6 +5,7 @@ import Home from "./Components/Home.jsx"
 import SampleService from "./Components/SampleServices"
 import Contact from "./Assets/Contact.jsx"
 import Result from "./Components/Result"
+import "./Styles/App.css"
 function App() {
   return (
     <>
