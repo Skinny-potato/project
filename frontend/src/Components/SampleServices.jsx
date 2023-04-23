@@ -44,8 +44,7 @@ const Services = () => {
 
   const handlFinalSubmission = (e) => {
     e.preventDefault();
-    const controller = new AbortController();
-    setAbortController(controller);
+    console.log("final triggered");
 
     const formData = new FormData();
     if (submissionText) {
@@ -54,7 +53,7 @@ const Services = () => {
       console.log(formData);
       setLoading(true)
       axios
-      .post("/result", formData, { signal: controller.signal })
+      .post("/result", formData, { signal: abortController.signal })
       .then((response) => {
         setLoading(false);
         navigate("/result", { state: { data: response.data } });
@@ -70,7 +69,9 @@ const Services = () => {
     }
   };
   const handleBackClick = () => {
+    console.log("triggered");
     if (abortController) {
+      console.log("triggered");
       abortController.abort();
       setLoading(false)
       setFlag(false)
@@ -89,13 +90,17 @@ const Services = () => {
       componentRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   },[flag])
-  // console.log("result",result);
+  useEffect(()=>{
+    const controller = new AbortController();
+    setAbortController(controller);
+  },[])
+  // console.log("result",result)
 
   console.log(value);
   const switchTabs = () => {
     if (value === "Textbox") {
       console.log("Text Uploading");
-      return <TextUpload handleLoading={handleLoading} />;
+      return <TextUpload handleLoading={handleLoading}/>;
     }
     if (value === "Image") {
       console.log("Image Uploading");
